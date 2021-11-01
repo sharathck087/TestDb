@@ -26,4 +26,4 @@ jobs:
                sudo service mysql status
                # mysql -u root -e "show databases"
                with:
-               locations: filesystem:./sqlQueries  
+               locations: filesystem:./SqlQueries  
