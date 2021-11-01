@@ -25,4 +25,5 @@ jobs:
                sudo systemctl start mysql.service
                sudo service mysql status
                # mysql -u root -e "show databases"
-
+               with:
+                locations: filesystem:./sql
