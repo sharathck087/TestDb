@@ -24,4 +24,5 @@ jobs:
         run: |
                sudo systemctl start mysql.service
                sudo service mysql status
+               mysql -u root -e "create database testdb";
                
