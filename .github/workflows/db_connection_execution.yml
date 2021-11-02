@@ -11,8 +11,8 @@ jobs:
         id: environment
         run: |
           ${{ dbType }}='mysql'
-          if [ "${{ env.dbType }}" != "" ]; then
-              ${{ dbType }}=${{ env.dbType }}
+          if [ "${{ secrets.dbType }}" != "" ]; then
+              ${{ dbType }}=${{ secrets.dbType }}
           fi
            echo "::set-output name=DBTYPE::${dbType}"
            echo "Database Type : ${dbType}"
@@ -34,19 +34,19 @@ jobs:
         with:
             server-name: ${{ env.DB_SERVER_NAME }}
             connection-string: ${{ env.DB_CONNECTION_STRING }}
-            username: ${{ env.DB_USERNAME }}
-            password: ${{ env.DB_PASSWORD }}
-            database: ${{ env.DB_DATABASE }}
-            sql-file: ${{ env.SQL_FILE }}
-            arguments: ${{ env.ARGUMENTS }} # optional
+            username: ${{ secrets.DB_USERNAME }}
+            password: ${{ secrets.DB_PASSWORD }}
+            database: ${{ secrets.DB_DATABASE }}
+            sql-file: ${{ secrets.SQL_FILE }}
+            arguments: ${{ secrets.ARGUMENTS }} # optional
 
       - name: Setup Azure PostgreSQL
         if: ${{ dbType }} == 'postgresql'
         uses: Azure/postgresql@v1
         with:
-            server-name: ${{ env.DB_SERVER_NAME }}
-            connection-string: ${{ env.DB_CONNECTION_STRING }}
-            plsql-file: ${{ env.PLSQL_FILE }}
-            arguments: ${{ env.ARGUMENTS }} # optional
+            server-name: ${{ secrets.DB_SERVER_NAME }}
+            connection-string: ${{ secrets.DB_CONNECTION_STRING }}
+            plsql-file: ${{ secrets.PLSQL_FILE }}
+            arguments: ${{ secrets.ARGUMENTS }} # optional
 
      
