@@ -4,20 +4,20 @@ on:
     branches:
     - main
 jobs:
-  getDbEnvi:
+  getDbEnv:
     runs-on: ubuntu-latest
     steps:
       - name: Get Database type
         id: environment
         run: |
           ${{ dbType }}='mysql'
-          if [ "${{ github.event.client_payload.dbType }}" != "" ]; then
-              ${{ dbType }}=${{ github.event.client_payload.dbType }}
+          if [ "${{ env.dbType }}" != "" ]; then
+              ${{ dbType }}=${{ env.dbType }}
           fi
-          # echo "::set-output name=DBTYPE::${dbType}"
-          # echo "Database Type : ${dbType}"
-    outputs:
-      ${{ dbType }}=: ${{ steps.environment.outputs.dbType }}
+           echo "::set-output name=DBTYPE::${dbType}"
+           echo "Database Type : ${dbType}"
+   # outputs:
+   #   ${{ dbType }}=: ${{ steps.environment.outputs.dbType }}
 
   runDB: 
     name: 'Run MYSQL'
