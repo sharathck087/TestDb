@@ -16,8 +16,8 @@ jobs:
           fi
            echo "::set-output name=DBTYPE::${dbType}"
            echo "Database Type : ${dbType}"
-   # outputs:
-   #   ${{ dbType }}=: ${{ steps.environment.outputs.dbType }}
+    outputs:
+      ${{ dbType }}=: ${{ steps.environment.outputs.dbType }}
 
   runDB: 
     name: 'Run MYSQL'
