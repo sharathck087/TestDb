@@ -6,7 +6,7 @@ on:
     - main
 
 env:
-  DB_NAME: test_db
+  DB_DATABASE: test_db
   DB_USER: root
   DB_PASSWORD: root
 
@@ -15,14 +15,16 @@ jobs:
     name: 'Run MYSQL'
     runs-on: ubuntu-latest
 
-    defaults:
-      run: 
-        shell: bash
+   # defaults:
+   #   run: 
+   #    shell: bash
 
     steps:
       - name: Setup MYSQL
         run: |
-               sudo systemctl start mysql.service
+               # sudo systemctl start mysql.service
+               sudo /etc/init.d/mysql start
                sudo service mysql status
                # mysql -u root -e "show databases"
+               mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
