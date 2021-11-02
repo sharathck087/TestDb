@@ -10,14 +10,14 @@ jobs:
       - name: Get Database type
         id: environment
         run: |
-          ${dbType}='mysql'
+          ${{ dbType }}='mysql'
           if [ "${{ github.event.client_payload.dbType }}" != "" ]; then
-              ${dbType}=${{ github.event.client_payload.dbType }}
+              ${{ dbType }}=${{ github.event.client_payload.dbType }}
           fi
-          echo "::set-output name=DBTYPE::${dbType}"
-          echo "Database Type : ${dbType}"
+          # echo "::set-output name=DBTYPE::${dbType}"
+          # echo "Database Type : ${dbType}"
     outputs:
-      ${dbType}=: ${{ steps.environment.outputs.dbType }}
+      ${{ dbType }}=: ${{ steps.environment.outputs.dbType }}
 
   runDB: 
     name: 'Run MYSQL'
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Setup MYSQL
-        if: ${dbType} == 'mysql'
+        if: ${{ dbType }} == 'mysql'
         uses: Azure/mysql@v1
         with:
             server-name: ${{ env.DB_SERVER_NAME }}
@@ -41,7 +41,7 @@ jobs:
             arguments: ${{ env.ARGUMENTS }} # optional
 
       - name: Setup Azure PostgreSQL
-        if: ${dbType} == 'postgresql'
+        if: ${{ dbType }} == 'postgresql'
         uses: Azure/postgresql@v1
         with:
             server-name: ${{ env.DB_SERVER_NAME }}
