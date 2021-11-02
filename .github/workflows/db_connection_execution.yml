@@ -11,13 +11,13 @@ jobs:
         id: environment
         run: |
           ${dbType}='mysql'
-          if [ "${{ github.event.client_payload.${dbType} }}" != "" ]; then
-              ${dbType}=${{ github.event.client_payload.${dbType} }}
+          if [ "${{ github.event.client_payload.dbType }}" != "" ]; then
+              ${dbType}=${{ github.event.client_payload.dbType }}
           fi
           echo "::set-output name=DBTYPE::${dbType}"
           echo "Database Type : ${dbType}"
     outputs:
-      ${dbType}=: ${{ steps.environment.outputs.DBTYPE }}
+      ${dbType}=: ${{ steps.environment.outputs.dbType }}
 
   runDB: 
     name: 'Run MYSQL'
